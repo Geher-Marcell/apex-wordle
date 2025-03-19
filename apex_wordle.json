@@ -1,0 +1,196 @@
+{
+    "characters": [
+      {
+        "name": "Wraith",
+        "nationality": "Unknown",
+        "gender": "Female",
+        "hitbox_size": "Small",
+        "speed": "5.5 m/s",
+        "role": "Offensive"
+      },
+      {
+        "name": "Gibraltar",
+        "nationality": "Samoan",
+        "gender": "Male",
+        "hitbox_size": "Large",
+        "speed": "5.0 m/s",
+        "role": "Defensive"
+      },
+      {
+        "name": "Lifeline",
+        "nationality": "Bajan (Barbadian)",
+        "gender": "Female",
+        "hitbox_size": "Small",
+        "speed": "5.5 m/s",
+        "role": "Support"
+      },
+      {
+        "name": "Pathfinder",
+        "nationality": "N/A (MRVN Robot)",
+        "gender": "Male Programming",
+        "hitbox_size": "Large",
+        "speed": "5.5 m/s",
+        "role": "Recon"
+      },
+      {
+        "name": "Bloodhound",
+        "nationality": "Icelandic",
+        "gender": "Non-binary",
+        "hitbox_size": "Medium",
+        "speed": "5.5 m/s",
+        "role": "Recon"
+      },
+      {
+        "name": "Bangalore",
+        "nationality": "American",
+        "gender": "Female",
+        "hitbox_size": "Medium",
+        "speed": "5.5 m/s",
+        "role": "Offensive"
+      },
+      {
+        "name": "Caustic",
+        "nationality": "American",
+        "gender": "Male",
+        "hitbox_size": "Large",
+        "speed": "5.0 m/s",
+        "role": "Defensive"
+      },
+      {
+        "name": "Mirage",
+        "nationality": "American",
+        "gender": "Male",
+        "hitbox_size": "Medium",
+        "speed": "5.5 m/s",
+        "role": "Offensive"
+      },
+      {
+        "name": "Octane",
+        "nationality": "Mexican",
+        "gender": "Male",
+        "hitbox_size": "Medium",
+        "speed": "6.0 m/s",
+        "role": "Offensive"
+      },
+      {
+        "name": "Wattson",
+        "nationality": "French",
+        "gender": "Female",
+        "hitbox_size": "Small",
+        "speed": "5.5 m/s",
+        "role": "Defensive"
+      },
+      {
+        "name": "Crypto",
+        "nationality": "Korean",
+        "gender": "Male",
+        "hitbox_size": "Medium",
+        "speed": "5.5 m/s",
+        "role": "Recon"
+      },
+      {
+        "name": "Revenant",
+        "nationality": "Unknown",
+        "gender": "Male",
+        "hitbox_size": "Large",
+        "speed": "5.5 m/s",
+        "role": "Offensive"
+      },
+      {
+        "name": "Loba",
+        "nationality": "Portuguese",
+        "gender": "Female",
+        "hitbox_size": "Medium",
+        "speed": "5.5 m/s",
+        "role": "Support"
+      },
+      {
+        "name": "Rampart",
+        "nationality": "Indian",
+        "gender": "Female",
+        "hitbox_size": "Medium",
+        "speed": "5.5 m/s",
+        "role": "Defensive"
+      },
+      {
+        "name": "Horizon",
+        "nationality": "Scottish",
+        "gender": "Female",
+        "hitbox_size": "Medium",
+        "speed": "5.5 m/s",
+        "role": "Offensive"
+      },
+      {
+        "name": "Fuse",
+        "nationality": "Australian",
+        "gender": "Male",
+        "hitbox_size": "Large",
+        "speed": "5.5 m/s",
+        "role": "Offensive"
+      },
+      {
+        "name": "Valkyrie",
+        "nationality": "Japanese-American",
+        "gender": "Female",
+        "hitbox_size": "Medium",
+        "speed": "5.5 m/s",
+        "role": "Recon"
+      },
+      {
+        "name": "Seer",
+        "nationality": "Bojan (Fictional)",
+        "gender": "Male",
+        "hitbox_size": "Medium",
+        "speed": "5.5 m/s",
+        "role": "Recon"
+      },
+      {
+        "name": "Ash",
+        "nationality": "Unknown",
+        "gender": "Female Programming",
+        "hitbox_size": "Medium",
+        "speed": "5.5 m/s",
+        "role": "Offensive"
+      },
+      {
+        "name": "Mad Maggie",
+        "nationality": "Salvoan (Fictional)",
+        "gender": "Female",
+        "hitbox_size": "Medium",
+        "speed": "5.5 m/s",
+        "role": "Offensive"
+      },
+      {
+        "name": "Newcastle",
+        "nationality": "American",
+        "gender": "Male",
+        "hitbox_size": "Large",
+        "speed": "5.0 m/s",
+        "role": "Defensive"
+      },
+      {
+        "name": "Vantage",
+        "nationality": "Págos (Fictional)",
+        "gender": "Female",
+        "hitbox_size": "Medium",
+        "speed": "5.5 m/s",
+        "role": "Recon"
+      },
+      {
+        "name": "Catalyst",
+        "nationality": "Solace (Fictional)",
+        "gender": "Transgender Female",
+        "hitbox_size": "Medium",
+        "speed": "5.5 m/s",
+        "role": "Defensive"
+      },
+      {
+        "name": "Ballistic",
+        "nationality": "Thunderdome (Fictional)",
+        "gender": "Male",
+        "hitbox_size": "Medium",
+        "speed": "5.5 m/s",
+        "role": "Offensive"
+      }
+    ]
+}

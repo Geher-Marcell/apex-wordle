@@ -1,0 +1,379 @@
+[
+    {
+      "name": "HAVOC Rifle",
+      "weapon_type": "Assault Rifle",
+      "ammo_type": "Energy Ammo",
+      "rpm": 672,
+      "dps": 201.6,
+      "base_mag_size": 24,
+      "damage_profile": {
+        "head": 24,
+        "body": 18,
+        "leg": 14
+      }
+    },
+    {
+      "name": "VK-47 Flatline",
+      "weapon_type": "Assault Rifle",
+      "ammo_type": "Heavy Rounds",
+      "rpm": 600,
+      "dps": 180,
+      "base_mag_size": 20,
+      "damage_profile": {
+        "head": 32,
+        "body": 20,
+        "leg": 16
+      }
+    },
+    {
+      "name": "Nemesis Burst AR",
+      "weapon_type": "Assault Rifle",
+      "ammo_type": "Energy Ammo",
+      "rpm": 540,
+      "dps": 180,
+      "base_mag_size": 20,
+      "damage_profile": {
+        "head": 27,
+        "body": 17,
+        "leg": 14
+      }
+    },
+    {
+      "name": "Hemlok Burst AR",
+      "weapon_type": "Assault Rifle",
+      "ammo_type": "Heavy Rounds",
+      "rpm": 643,
+      "dps": 171.5,
+      "base_mag_size": 18,
+      "damage_profile": {
+        "head": 35,
+        "body": 20,
+        "leg": 15
+      }
+    },
+    {
+      "name": "R-301 Carbine",
+      "weapon_type": "Assault Rifle",
+      "ammo_type": "Light Rounds",
+      "rpm": 810,
+      "dps": 189,
+      "base_mag_size": 18,
+      "damage_profile": {
+        "head": 25,
+        "body": 14,
+        "leg": 11
+      }
+    },
+    {
+      "name": "Alternator SMG",
+      "weapon_type": "Sub Machine Gun",
+      "ammo_type": "Light Rounds",
+      "rpm": 600,
+      "dps": 160,
+      "base_mag_size": 19,
+      "damage_profile": {
+        "head": 24,
+        "body": 16,
+        "leg": 13
+      }
+    },
+    {
+      "name": "Prowler Burst PDW",
+      "weapon_type": "Sub Machine Gun",
+      "ammo_type": "Heavy Rounds",
+      "rpm": 800,
+      "dps": 160,
+      "base_mag_size": 20,
+      "damage_profile": {
+        "head": 23,
+        "body": 15,
+        "leg": 12
+      }
+    },
+    {
+      "name": "R-99 SMG",
+      "weapon_type": "Sub Machine Gun",
+      "ammo_type": "Light Rounds",
+      "rpm": 1080,
+      "dps": 198,
+      "base_mag_size": 20,
+      "damage_profile": {
+        "head": 17,
+        "body": 11,
+        "leg": 9
+      }
+    },
+    {
+      "name": "Volt SMG",
+      "weapon_type": "Sub Machine Gun",
+      "ammo_type": "Energy Ammo",
+      "rpm": 720,
+      "dps": 180,
+      "base_mag_size": 19,
+      "damage_profile": {
+        "head": 23,
+        "body": 15,
+        "leg": 12
+      }
+    },
+    {
+      "name": "C.A.R. SMG",
+      "weapon_type": "Sub Machine Gun",
+      "ammo_type": "Light & Heavy Rounds",
+      "rpm": 930,
+      "dps": 201.5,
+      "base_mag_size": 20,
+      "damage_profile": {
+        "head": 20,
+        "body": 13,
+        "leg": 10
+      }
+    },
+    {
+      "name": "Devotion LMG",
+      "weapon_type": "Light Machine Gun",
+      "ammo_type": "Energy Ammo",
+      "rpm": 900,
+      "dps": 225,
+      "base_mag_size": 36,
+      "damage_profile": {
+        "head": 23,
+        "body": 16,
+        "leg": 12
+      }
+    },
+    {
+      "name": "L-STAR EMG",
+      "weapon_type": "Light Machine Gun",
+      "ammo_type": "Energy Ammo",
+      "rpm": 600,
+      "dps": 174,
+      "base_mag_size": 24,
+      "damage_profile": {
+        "head": 30,
+        "body": 17,
+        "leg": 14
+      }
+    },
+    {
+      "name": "M600 Spitfire",
+      "weapon_type": "Light Machine Gun",
+      "ammo_type": "Light Rounds",
+      "rpm": 540,
+      "dps": 162,
+      "base_mag_size": 35,
+      "damage_profile": {
+        "head": 27,
+        "body": 18,
+        "leg": 14
+      }
+    },
+    {
+      "name": "Rampage LMG",
+      "weapon_type": "Light Machine Gun",
+      "ammo_type": "Heavy Rounds",
+      "rpm": 300,
+      "dps": 140,
+      "base_mag_size": 28,
+      "damage_profile": {
+        "head": 42,
+        "body": 28,
+        "leg": 24
+      }
+    },
+    {
+      "name": "G7 Scout",
+      "weapon_type": "Marksman Weapon",
+      "ammo_type": "Light Rounds",
+      "rpm": 240,
+      "dps": 136,
+      "base_mag_size": 10,
+      "damage_profile": {
+        "head": 60,
+        "body": 34,
+        "leg": 26
+      }
+    },
+    {
+      "name": "Triple Take",
+      "weapon_type": "Marksman Weapon",
+      "ammo_type": "Energy Ammo",
+      "rpm": 72,
+      "dps": 138.6,
+      "base_mag_size": 18,
+      "damage_profile": {
+        "head": 138,
+        "body": 69,
+        "leg": 63
+      }
+    },
+    {
+        "name": "30-30 Repeater",
+        "weapon_type": "Marksman Weapon",
+        "ammo_type": "Heavy Rounds",
+        "rpm": 140,
+        "dps": 122.5,
+        "base_mag_size": 6,
+        "damage_profile": {
+        "head": 74,
+        "body": 42,
+        "leg": 32
+        }
+    },
+    {
+        "name": "Bocek Compound Bow",
+        "weapon_type": "Marksman Weapon",
+        "ammo_type": "Arrows",
+        "rpm": 72,
+        "dps": 122.4,
+        "base_mag_size": 1,
+        "damage_profile": {
+        "head": 123,
+        "body": 70,
+        "leg": 54
+        }
+    },
+    {
+        "name": "Charge Rifle",
+        "weapon_type": "Sniper Rifle",
+        "ammo_type": "Sniper Ammo",
+        "rpm": 30,
+        "dps": 90,
+        "base_mag_size": 8,
+        "damage_profile": {
+        "head": 116,
+        "body": 90,
+        "leg": 90
+        }
+    },
+    {
+        "name": "Longbow DMR",
+        "weapon_type": "Sniper Rifle",
+        "ammo_type": "Sniper Ammo",
+        "rpm": 78,
+        "dps": 97.5,
+        "base_mag_size": 6,
+        "damage_profile": {
+        "head": 118,
+        "body": 55,
+        "leg": 44
+        }
+    },
+    {
+        "name": "Kraber .50-Cal Sniper",
+        "weapon_type": "Sniper Rifle",
+        "ammo_type": "Special Ammo",
+        "rpm": 30,
+        "dps": 225,
+        "base_mag_size": 4,
+        "damage_profile": {
+        "head": 435,
+        "body": 145,
+        "leg": 116
+        }
+    },
+    {
+        "name": "Sentinel",
+        "weapon_type": "Sniper Rifle",
+        "ammo_type": "Sniper Ammo",
+        "rpm": 37,
+        "dps": 70.3,
+        "base_mag_size": 4,
+        "damage_profile": {
+        "head": 140,
+        "body": 70,
+        "leg": 63
+        }
+    },
+    {
+        "name": "EVA-8 Auto",
+        "weapon_type": "Shotgun",
+        "ammo_type": "Shotgun Shells",
+        "rpm": 120,
+        "dps": 100.8,
+        "base_mag_size": 8,
+        "damage_profile": {
+        "head": 63,
+        "body": 63,
+        "leg": 54
+        }
+    },
+    {
+        "name": "Mastiff Shotgun",
+        "weapon_type": "Shotgun",
+        "ammo_type": "Shotgun Shells",
+        "rpm": 66,
+        "dps": 104.5,
+        "base_mag_size": 4,
+        "damage_profile": {
+        "head": 128,
+        "body": 88,
+        "leg": 88
+        }
+    },
+    {
+        "name": "Mozambique Shotgun",
+        "weapon_type": "Shotgun",
+        "ammo_type": "Shotgun Shells",
+        "rpm": 132,
+        "dps": 99,
+        "base_mag_size": 6,
+        "damage_profile": {
+        "head": 69,
+        "body": 45,
+        "leg": 45
+        }
+    },
+    {
+        "name": "Peacekeeper",
+        "weapon_type": "Shotgun",
+        "ammo_type": "Shotgun Shells",
+        "rpm": 58,
+        "dps": 78.3,
+        "base_mag_size": 5,
+        "damage_profile": {
+        "head": 121,
+        "body": 99,
+        "leg": 77
+        }
+    },
+    {
+        "name": "RE-45 Auto",
+        "weapon_type": "Pistol",
+        "ammo_type": "Light Rounds",
+        "rpm": 780,
+        "dps": 156,
+        "base_mag_size": 15,
+        "damage_profile": {
+        "head": 18,
+        "body": 12,
+        "leg": 11
+        }
+    },
+    {
+        "name": "P2020",
+        "weapon_type": "Pistol",
+        "ammo_type": "Light Rounds",
+        "rpm": 420,
+        "dps": 84,
+        "base_mag_size": 12,
+        "damage_profile": {
+        "head": 27,
+        "body": 18,
+        "leg": 14
+        }
+    },
+    {
+        "name": "Wingman",
+        "weapon_type": "Pistol",
+        "ammo_type": "Sniper Ammo",
+        "rpm": 156,
+        "dps": 117,
+        "base_mag_size": 6,
+        "damage_profile": {
+        "head": 97,
+        "body": 45,
+        "leg": 41
+        }
+    }
+]

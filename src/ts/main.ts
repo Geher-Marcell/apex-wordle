@@ -1,6 +1,6 @@
-import Countdown from "./ts/countdown.ts";
-import WeaponGuesser from "./ts/weapon_guesser.ts";
-import ChampGuesser from "./ts/champ_guesser.ts";
+import Countdown from "./countdown.ts";
+import WeaponGuesser from "./weapon_guesser.ts";
+import ChampGuesser from "./champ_guesser.ts";
 
 const rootDiv = document.querySelector('#app') as HTMLDivElement;
 const navbarItems = document.querySelectorAll<HTMLAnchorElement>('a[data-href]');

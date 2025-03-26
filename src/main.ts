@@ -13,7 +13,8 @@ interface Route {
 const routes: Record<string, Route> = {
   '/': { page: 'home.html', code: Countdown },
   '/champ': { page: 'champ.html', code: undefined },
-  '/weapon': { page: 'weapon.html', code: undefined }
+  '/weapon': { page: 'weapon.html', code: undefined },
+  '/quotes': { page: 'quotes.html', code: undefined }
 };
 
 const loadPage = async (page: string): Promise<string> => {

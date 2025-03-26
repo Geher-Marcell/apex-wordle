@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "watch": "tailwindcss -c ./tailwind.config.js -i ./input.css -o ./src/output.css --watch"
   },
   "devDependencies": {
     "typescript": "~5.7.2",

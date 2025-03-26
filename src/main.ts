@@ -1,3 +1,5 @@
+import Countdown from "./ts/Countdown.js";
+
 const rootDiv = document.querySelector('#app') as HTMLDivElement;
 const navbarItems = document.querySelectorAll<HTMLAnchorElement>('a[data-href]');
 
@@ -5,11 +7,11 @@ const PAGES = '/pages/';
 
 interface Route {
   page: string;
-  code?: new () => void | undefined;
+  code?: new () => any;
 }
 
 const routes: Record<string, Route> = {
-  '/': { page: 'home.html', code: undefined },
+  '/': { page: 'home.html', code: Countdown },
   '/champ': { page: 'champ.html', code: undefined },
   '/weapon': { page: 'weapon.html', code: undefined }
 };

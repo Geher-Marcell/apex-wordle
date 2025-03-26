@@ -1,4 +1,6 @@
-import Countdown from "./ts/Countdown.js";
+import Countdown from "./ts/countdown.ts";
+import WeaponGuesser from "./ts/weapon_guesser.ts";
+import ChampGuesser from "./ts/champ_guesser.ts";
 
 const rootDiv = document.querySelector('#app') as HTMLDivElement;
 const navbarItems = document.querySelectorAll<HTMLAnchorElement>('a[data-href]');
@@ -12,8 +14,8 @@ interface Route {
 
 const routes: Record<string, Route> = {
   '/': { page: 'home.html', code: Countdown },
-  '/champ': { page: 'champ.html', code: undefined },
-  '/weapon': { page: 'weapon.html', code: undefined }
+  '/champ': { page: 'champ.html', code: ChampGuesser },
+  '/weapon': { page: 'weapon.html', code: WeaponGuesser }
 };
 
 const loadPage = async (page: string): Promise<string> => {

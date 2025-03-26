@@ -13,6 +13,7 @@ export default class WeaponGuesser{
         this.randomWeapon = null;
 
         this.Initialize();
+        // console.log("constructed")
         
     }
     
@@ -20,7 +21,7 @@ export default class WeaponGuesser{
         const rnd =(await this.GetWeapons())[this.random];
         (document.querySelector("#guess_btn") as HTMLButtonElement)?.addEventListener('click', async () => {
             this.CompareWeapons(await this.GetWeapons(), rnd)
-
+            // console.log("pressed")
         });
     }
 

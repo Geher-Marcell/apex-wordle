@@ -1,5 +1,5 @@
 export default class ChampGuesser{
-    random = Math.floor(Math.random() * 24)
+    random = Math.floor(Math.random() * 13)
     numOfGuesses = 0;
     
     constructor(){
@@ -8,17 +8,26 @@ export default class ChampGuesser{
     }
 
     async GetChamps(){
-        const response = await fetch("http://localhost:3000/characters");
+        const response = await fetch("http://localhost:4000/characters");
         // console.log(response.json())
         return await response.json();
     }
 
     async Initialize(){
         const rnd = (await this.GetChamps())[this.random];
+        // console.log(await this.GetChamps())
+        this.GetRandomQuote(rnd);
         document.querySelector("#guess_champ_btn")?.addEventListener('click', async () => {
             this.DisplayGuess(rnd, await this.GetChamps())
         })
 
+    }
+
+    GetRandomQuote(champ: any){
+        console.log(champ);
+        // console.log(champ.voicelines.length);
+        let randomLineIndex = Math.floor(Math.random() * champ.voicelines.length);
+        document.querySelector("#quoteHolder p")!.innerHTML = champ.voicelines[randomLineIndex];
     }
 
     async DisplayGuess(champ: any, champs: any){
@@ -33,16 +42,12 @@ export default class ChampGuesser{
 
         if(champGuess != null){
             let row: HTMLDivElement = document.createElement("div") as HTMLDivElement;
-            row.className = "flex flex-row items-center gap-20 h-10";
+            row.className = "flex flex-row items-center justify-center gap-2 bg-gray-900 w-min py-4 px-6";
             row.innerHTML = `
-                <p class="border text-center w-40 image" style="background-color: ${(champ.name == champGuess.name)? "green" : "red"}">${champGuess.name}</p>
-                <p class="border text-center w-40 nationality" style="background-color: ${(champ.nationality == champGuess.nationality)? "green" : "red"}">${champGuess.nationality}</p>
-                <p class="border text-center w-40 gender" style="background-color: ${(champ.gender == champGuess.gender)? "green" : "red"}">${champGuess.gender}</p>
-                <p class="border text-center w-40 hitboxSize" style="background-color: ${(champ.hitbox_size == champGuess.hitbox_size)? "green" : "red"}">${champGuess.hitbox_size}</p>
-                <p class="border text-center w-40 speed" style="background-color: ${(champ.speed == champGuess.speed)? "green" : "red"}">${champGuess.speed}</p>
-                <p class="border text-center w-40 role" style="background-color: ${(champ.role == champGuess.role)? "green" : "red"}">${champGuess.role}</p>
+                <p class="text-center image w-20 h-20 bg-gray-800"><img src="./public/images/legends_cards/${champGuess.name}_Legend_Card.webp" class="-translate-y-2.5" alt="${champGuess.name}"></p>
+                <p class="text-center name w-30 text-2xl">${champGuess.name}</p>
             `;
-            document.querySelector("#table")?.appendChild(row);
+            document.querySelector("#guesses")?.appendChild(row);
             this.numOfGuesses++;
             this.CheckCorrectGuess(champGuess.name, champ.name);
         }

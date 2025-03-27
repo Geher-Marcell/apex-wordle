@@ -11,6 +11,7 @@ export default class WeaponGuesser{
     };
 
     async Initialize(){
+        this.CheckForSave();
         const weapons = await this.GetWeapons();
         const randomWeaponIndex = Math.floor(this.rnd.next() * weapons.length);
         // console.log(weapons);
@@ -32,13 +33,13 @@ export default class WeaponGuesser{
         const nameInput: string = (document.querySelector("#champ_search") as HTMLInputElement).value;
         let weaponInput;
         for(let i = 0; i<weapons.length; i++){
-            console.log(weapons[i].name);
+            // console.log(weapons[i].name);
             if((weapons[i].name.toLowerCase()).includes( nameInput.toLowerCase())){
                 weaponInput = weapons[i];
-            }
-        }
-        console.log(rndWeapon);
-        console.log(weaponInput);
+            };
+        };
+        // console.log(rndWeapon);
+        // console.log(weaponInput);
         if(weaponInput != null){
             let row: HTMLDivElement = document.createElement("div") as HTMLDivElement;
             row.className = "flex flex-row items-center gap-20 h-20 bg-gray-900 p-3";
@@ -54,18 +55,34 @@ export default class WeaponGuesser{
             document.querySelector("#table")?.appendChild(row);
             this.numOfTries++;
             this.CheckGuess(weaponInput.name, rndWeapon.name);
-        }
+        };
     };
 
     CheckGuess(guess: string, name: string): void{
         if(guess == name) {
             document.querySelector("#search")!.innerHTML = `<h3>Gratulálok, eltaláltad!</h3><h5>Próbálkozások száma: ${this.numOfTries}</h5>`;
-        }
+            this.Save();
+        };
     };
 
     CompareNumericalData(guessData: number, data: number): string{
         if(guessData < data) return "↑";
         else if(guessData > data) return "↓";
         return "";
+    };
+
+    Save(): void{
+        localStorage.setItem('numOfWeaponGuesses', this.numOfTries.toString());
+        localStorage.setItem('date', new Date().getDate().toString());
+    };
+
+    CheckForSave(): void{
+        const num = localStorage.getItem('numOfWeaponGuesses');
+        const date = localStorage.getItem('date');
+        if(num && date){
+            if(parseInt(date) == new Date().getDate()){
+                document.querySelector("#search")!.innerHTML = `<h4>A mai feladványt már teljesítetted!</h4><br><p>Próbálozások száma:${num}</p>`;   
+            };
+        };
     };
 }

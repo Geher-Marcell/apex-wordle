@@ -1,7 +1,6 @@
 import SeededRandom from "./SeededRandom.ts";
 
 export default class ChampGuesser{
-    random = Math.floor(Math.random() * 13)
     rnd = new SeededRandom(new Date().getDate().toString()); //SEEDED RANDOM NUMBER
     
     numOfGuesses = 0;
@@ -9,15 +8,16 @@ export default class ChampGuesser{
     constructor(){
         // this.GetChamps();
         this.Initialize();
-    }
+    };
 
     async GetChamps(){
         const response = await fetch("http://localhost:4000/characters");
         // console.log(response.json())
         return await response.json();
-    }
+    };
 
     async Initialize(){
+        this.CheckForSave();
         const champs = await this.GetChamps();
         // console.log(champs);
         const randomChampIndex = Math.floor(this.rnd.next()*champs.length);
@@ -26,27 +26,27 @@ export default class ChampGuesser{
         // console.log(await this.GetChamps())
         this.GetRandomQuote(randomChamp);
         document.querySelector("#guess_champ_btn")?.addEventListener('click', async () => {
-            this.DisplayGuess(randomChamp, champs)
-        })
+            this.DisplayGuess(randomChamp, champs);
+        });
 
-    }
+    };
 
     GetRandomQuote(champ: any){
         console.log(champ);
         // console.log(champ.voicelines.length);
         let randomLineIndex = Math.floor(this.rnd.next() * champ.voicelines.length);
         document.querySelector("#quoteHolder p")!.innerHTML = champ.voicelines[randomLineIndex];
-    }
+    };
 
     async DisplayGuess(champ: any, champs: any){
         const guess = (document.querySelector("#champ_search")as HTMLInputElement).value;
         let champGuess;
         for(let i = 0; i < champs.length; i++){
             if(champs[i].name.toLowerCase().includes(guess.toLowerCase())) champGuess = champs[i];
-        }
+        };
         
-        console.log(champ);
-        console.log(champGuess);
+        // console.log(champ);
+        // console.log(champGuess);
 
         if(champGuess != null){
             let row: HTMLDivElement = document.createElement("div") as HTMLDivElement;
@@ -58,13 +58,29 @@ export default class ChampGuesser{
             document.querySelector("#guesses")?.appendChild(row);
             this.numOfGuesses++;
             this.CheckCorrectGuess(champGuess.name, champ.name);
-        }
+        };
 
-    }
+    };
 
     CheckCorrectGuess(guess: string, champ: string) {
         if(guess == champ){
-            document.querySelector("#search")!.innerHTML = `<h4>Gratulálok eltaláltad!</h4><p>Próbálozások száma: ${this.numOfGuesses}</p>` ;
-        }
-    }
-}
+            document.querySelector("#search")!.innerHTML = `<h4>Gratulálok eltaláltad!</h4><br><p>Próbálozások száma: ${this.numOfGuesses}</p>` ;
+            this.Save();
+        };
+    };
+
+    Save(): void{
+        localStorage.setItem('numOfChampGuesses', this.numOfGuesses.toString());
+        localStorage.setItem('date', new Date().getDate().toString());
+    };
+
+    CheckForSave(){
+        const getNum = localStorage.getItem('numOfChampGuesses');
+        const getDate = localStorage.getItem('date');
+        if(getNum && getDate){
+            if(parseInt(getDate) == new Date().getDate()){
+                document.querySelector("#search")!.innerHTML = `<h4>A mai feladványt már teljesítetted!</h4><br><p>Próbálozások száma:${getNum}</p>`;   
+            };
+        };
+    };
+};

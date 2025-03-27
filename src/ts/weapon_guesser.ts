@@ -1,5 +1,9 @@
+import SeededRandom from "./SeededRandom.ts";
+
+
 export default class WeaponGuesser{
-    random = Math.floor(Math.random() * 28);
+    rnd = new SeededRandom(new Date().getDate().toString()); //SEEDED RANDOM NUMBER
+    
     numOfTries = 0;
     
     constructor() {
@@ -7,15 +11,21 @@ export default class WeaponGuesser{
     };
 
     async Initialize(){
-        const rnd =(await this.GetWeapons())[this.random];
+        const weapons = await this.GetWeapons();
+        const randomWeaponIndex = Math.floor(this.rnd.next() * weapons.length);
+        // console.log(weapons);
+        // console.log(randomWeaponIndex)
+        const randomWeapon = weapons[randomWeaponIndex];
+        
+        
         (document.querySelector("#guess_champ_btn") as HTMLButtonElement)?.addEventListener('click', async () => {
-            this.DisplayGuess(await this.GetWeapons(), rnd)
+            this.DisplayGuess(weapons, randomWeapon);
         });
     };
 
     async GetWeapons(){
         const response = await fetch("http://localhost:3000/weapons");
-        return await response.json()
+        return await response.json();
     };
 
     async DisplayGuess(weapons: any, rndWeapon: any){

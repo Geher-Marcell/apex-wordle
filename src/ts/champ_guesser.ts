@@ -1,5 +1,9 @@
+import SeededRandom from "./SeededRandom.ts";
+
 export default class ChampGuesser{
     random = Math.floor(Math.random() * 13)
+    rnd = new SeededRandom(new Date().getDate().toString()); //SEEDED RANDOM NUMBER
+    
     numOfGuesses = 0;
     
     constructor(){
@@ -14,11 +18,15 @@ export default class ChampGuesser{
     }
 
     async Initialize(){
-        const rnd = (await this.GetChamps())[this.random];
+        const champs = await this.GetChamps();
+        // console.log(champs);
+        const randomChampIndex = Math.floor(this.rnd.next()*champs.length);
+        const randomChamp = champs[randomChampIndex];
+        // const rnd = (await this.GetChamps())[this.random];
         // console.log(await this.GetChamps())
-        this.GetRandomQuote(rnd);
+        this.GetRandomQuote(randomChamp);
         document.querySelector("#guess_champ_btn")?.addEventListener('click', async () => {
-            this.DisplayGuess(rnd, await this.GetChamps())
+            this.DisplayGuess(randomChamp, champs)
         })
 
     }
@@ -26,7 +34,7 @@ export default class ChampGuesser{
     GetRandomQuote(champ: any){
         console.log(champ);
         // console.log(champ.voicelines.length);
-        let randomLineIndex = Math.floor(Math.random() * champ.voicelines.length);
+        let randomLineIndex = Math.floor(this.rnd.next() * champ.voicelines.length);
         document.querySelector("#quoteHolder p")!.innerHTML = champ.voicelines[randomLineIndex];
     }
 

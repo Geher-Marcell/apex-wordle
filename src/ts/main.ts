@@ -2,10 +2,15 @@ import Countdown from "./countdown.ts";
 import WeaponGuesser from "./weapon_guesser.ts";
 import ChampGuesser from "./champ_guesser.ts";
 
+import SeededRandom from "./SeededRandom.ts";
+
 const rootDiv = document.querySelector('#app') as HTMLDivElement;
 const navbarItems = document.querySelectorAll<HTMLAnchorElement>('a[data-href]');
 
 const PAGES = '/pages/';
+
+const rnd = new SeededRandom(new Date().getDate().toString()); //SEEDED RANDOM NUMBER
+
 
 interface Route {
   page: string;

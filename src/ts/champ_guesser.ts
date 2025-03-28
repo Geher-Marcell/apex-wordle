@@ -20,7 +20,7 @@ export default class ChampGuesser{
         this.CheckForSave();
         const champs = await this.GetChamps();
         // console.log(champs);
-        const randomChampIndex = Math.floor(this.rnd.next()*champs.length);
+        const randomChampIndex = Math.abs(Math.floor(this.rnd.next()*champs.length));
         const randomChamp = champs[randomChampIndex];
         // const rnd = (await this.GetChamps())[this.random];
         // console.log(await this.GetChamps())

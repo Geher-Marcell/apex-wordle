@@ -13,7 +13,7 @@ export default class WeaponGuesser{
     async Initialize(){
         this.CheckForSave();
         const weapons = await this.GetWeapons();
-        const randomWeaponIndex = Math.floor(this.rnd.next() * weapons.length);
+        const randomWeaponIndex = Math.abs(Math.floor(this.rnd.next() * weapons.length));
         // console.log(weapons);
         // console.log(randomWeaponIndex)
         const randomWeapon = weapons[randomWeaponIndex];

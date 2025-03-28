@@ -12,18 +12,16 @@ export default class ChampGuesser{
 
     async GetChamps(){
         const response = await fetch("http://localhost:3000/characters");
-        // console.log(response.json())
         return await response.json();
     };
 
     async Initialize(){
-        this.CheckForSave();
+        //this.CheckForSave();
         const champs = await this.GetChamps();
-        // console.log(champs);
+        
         const randomChampIndex = Math.abs(Math.floor(this.rnd.next()*champs.length));
         const randomChamp = champs[randomChampIndex];
-        // const rnd = (await this.GetChamps())[this.random];
-        // console.log(await this.GetChamps())
+        
         this.GetRandomQuote(randomChamp);
         document.querySelector("#guess_champ_btn")?.addEventListener('click', async () => {
             this.DisplayGuess(randomChamp, champs);
@@ -32,8 +30,6 @@ export default class ChampGuesser{
     };
 
     GetRandomQuote(champ: any){
-        console.log(champ);
-        // console.log(champ.voicelines.length);
         let randomLineIndex = Math.floor(this.rnd.next() * champ.voicelines.length);
         document.querySelector("#quoteHolder p")!.innerHTML = champ.voicelines[randomLineIndex];
     };
@@ -44,16 +40,15 @@ export default class ChampGuesser{
         for(let i = 0; i < champs.length; i++){
             if(champs[i].name.toLowerCase().includes(guess.toLowerCase())) champGuess = champs[i];
         };
-        
-        // console.log(champ);
-        // console.log(champGuess);
 
         if(champGuess != null){
+            let isCorrect = champGuess.name == champ.name;
+
             let row: HTMLDivElement = document.createElement("div") as HTMLDivElement;
             row.className = "flex flex-row items-center justify-center gap-2 bg-gray-900 w-min py-4 px-6";
             row.innerHTML = `
                 <p class="text-center image w-20 h-20 bg-gray-800"><img src="./public/images/legends_cards/${champGuess.name}_Legend_Card.webp" class="-translate-y-2.5" alt="${champGuess.name}"></p>
-                <p class="text-center name w-30 text-2xl">${champGuess.name}</p>
+                <p class="text-center name w-30 text-2xl ${(isCorrect ? "text-green-500" : "text-red-500")}">${champGuess.name}</p>
             `;
             document.querySelector("#guesses")?.appendChild(row);
             this.numOfGuesses++;

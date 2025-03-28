@@ -44,15 +44,24 @@ export default class WeaponGuesser{
             let row: HTMLDivElement = document.createElement("div") as HTMLDivElement;
             row.className = "flex flex-row items-center gap-20 h-20 bg-gray-900 p-3";
             row.innerHTML = `
-              <p class="border text-center w-40 image" style="background-color: ${(weaponInput.name == rndWeapon.name)? "green" : "red"};">${weaponInput.name}</p>
-              <p class="border text-center w-40 nationality" style="background-color: ${(weaponInput.weapon_type == rndWeapon.weapon_type)? "green" : "red"};">${weaponInput.weapon_type}</p>
-              <p class="border text-center w-40 gender" style="background-color: ${(weaponInput.ammo_type == rndWeapon.ammo_type)? "green" : "red"};">${weaponInput.ammo_type}</p>
-              <p class="border text-center w-40 hitboxSize" style="background-color: ${(weaponInput.rpm == rndWeapon.rpm)? "green": "red"};">${weaponInput.rpm} ${this.CompareNumericalData(weaponInput.rpm, rndWeapon.rpm)}</p>
-              <p class="border text-center w-40 speed" style="background-color: ${(weaponInput.dps == rndWeapon.dps)? "green": "red"};">${weaponInput.dps} ${this.CompareNumericalData(weaponInput.dps, rndWeapon.dps)}</p>
-              <p class="border text-center w-40 role" style="background-color: ${(weaponInput.base_mag_size == rndWeapon.base_mag_size)? "green": "red"};">${weaponInput.base_mag_size} ${this.CompareNumericalData(weaponInput.base_mag_size, rndWeapon.base_mag_size)}</p>
-              <p class="border text-center w-40 role" style="background-color: ${(weaponInput.damage_profile.head == rndWeapon.damage_profile.head)? "green": "red"};">${weaponInput.damage_profile.head}</p>
+              <p class="border text-center w-40 bg-red-700 bg-green-700 bg-${((weaponInput.name == rndWeapon.name)? "green" : "red")}-700">${weaponInput.name}</p>
+              <p class="border text-center w-40 bg-${((weaponInput.weapon_type == rndWeapon.weapon_type)? "green" : "red")}-700">${weaponInput.weapon_type}</p>
+              <p class="border text-center w-40 bg-${((weaponInput.ammo_type == rndWeapon.ammo_type)? "green" : "red")}-700">${weaponInput.ammo_type}</p>
+              <p class="border text-center w-40 bg-${((weaponInput.rpm == rndWeapon.rpm)? "green" : "red")}-700">${weaponInput.rpm} ${this.CompareNumericalData(weaponInput.rpm, rndWeapon.rpm)}</p>
+              <p class="border text-center w-40 bg-${((weaponInput.dps == rndWeapon.dps)? "green" : "red")}-700">${weaponInput.dps} ${this.CompareNumericalData(weaponInput.dps, rndWeapon.dps)}</p>
+              <p class="border text-center w-40 bg-${((weaponInput.base_mag_size == rndWeapon.base_mag_size)? "green" : "red")}-700"};">${weaponInput.base_mag_size} ${this.CompareNumericalData(weaponInput.base_mag_size, rndWeapon.base_mag_size)}</p>
+              <p class="border text-center w-40 bg-${((weaponInput.damage_profile.head == rndWeapon.damage_profile.head)? "green" : "red")}-700">${weaponInput.damage_profile.head}</p>
             `;
-            document.querySelector("#table")?.appendChild(row);
+
+            // Insert the row after the first element in the table
+            const table = document.querySelector("#table");
+            if(table && table.children.length > 0){
+                table.insertBefore(row, table.children[1] || null);
+            } else {
+                table?.appendChild(row);
+            }
+
+            (document.querySelector("#champ_search") as HTMLInputElement).value = "";
             this.numOfTries++;
             this.CheckGuess(weaponInput.name, rndWeapon.name);
         };
@@ -66,8 +75,8 @@ export default class WeaponGuesser{
     };
 
     CompareNumericalData(guessData: number, data: number): string{
-        if(guessData < data) return "↑";
-        else if(guessData > data) return "↓";
+        if(guessData < data) return "<i class='fa fa-caret-up fa-lg' aria-hidden='true'></i>";
+        else if(guessData > data) return "<i class='fa fa-caret-down fa-lg' aria-hidden='true'></i>";
         return "";
     };
 

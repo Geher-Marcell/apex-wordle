@@ -10,20 +10,14 @@ export default class ChampGuesser{
         this.Initialize();
     };
 
-    async GetChamps(){
-        let response;
-        try{
-            response = await fetch("http://localhost:3000/characters");
-        }
-        catch{
-            response = await fetch("/public/jsons/character_wordle.json");
-        }
+    async GetChamps(){        
+        const response = await fetch("http://localhost:4000/characters");
         
         return await response.json();
     };
 
     async Initialize(){
-        //this.CheckForSave();
+        this.CheckForSave();
         const champs = await this.GetChamps();
         
         const randomChampIndex = Math.abs(Math.floor(this.rnd.next()*champs.length));
@@ -57,7 +51,18 @@ export default class ChampGuesser{
                 <p class="text-center image w-20 h-20 bg-gray-800"><img src="./public/images/legends_cards/${champGuess.name}_Legend_Card.webp" class="-translate-y-2.5" alt="${champGuess.name}"></p>
                 <p class="text-center name w-30 text-2xl ${(isCorrect ? "text-green-500" : "text-red-500")}">${champGuess.name}</p>
             `;
-            document.querySelector("#guesses")?.appendChild(row);
+            //document.querySelector("#guesses")?.appendChild(row);
+
+            // Insert the row after the first element in the table
+            const table = document.querySelector("#table");
+            if(table && table.children.length > 0){
+                table.insertBefore(row, table.children[1] || null);
+            } else {
+                table?.appendChild(row);
+            }
+            
+            (document.querySelector("#champ_search")as HTMLInputElement).value = "";
+
             this.numOfGuesses++;
             this.CheckCorrectGuess(champGuess.name, champ.name);
         };

@@ -9,9 +9,6 @@ const navbarItems = document.querySelectorAll<HTMLAnchorElement>('a[data-href]')
 
 const PAGES = '/pages/';
 
-const rnd = new SeededRandom(new Date().getDate().toString()); //SEEDED RANDOM NUMBER
-
-
 interface Route {
   page: string;
   code?: new () => any;

@@ -11,7 +11,7 @@ export default class ChampGuesser{
     };
 
     async GetChamps(){
-        const response = await fetch("http://localhost:4000/characters");
+        const response = await fetch("http://localhost:3000/characters");
         // console.log(response.json())
         return await response.json();
     };

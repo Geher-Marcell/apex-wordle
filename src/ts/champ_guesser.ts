@@ -11,7 +11,14 @@ export default class ChampGuesser{
     };
 
     async GetChamps(){
-        const response = await fetch("http://localhost:3000/characters");
+        let response;
+        try{
+            response = await fetch("http://localhost:3000/characters");
+        }
+        catch{
+            response = await fetch("/public/jsons/character_wordle.json");
+        }
+        
         return await response.json();
     };
 

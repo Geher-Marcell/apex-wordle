@@ -4,7 +4,8 @@ export default class ChampGuesser{
     rnd = new SeededRandom(new Date().getDate().toString()); //SEEDED RANDOM NUMBER
     
     numOfGuesses = 0;
-    
+    guesses: string[] = [];
+
     constructor(){
         // this.GetChamps();
         this.Initialize();
@@ -20,7 +21,7 @@ export default class ChampGuesser{
         this.CheckForSave();
         const champs = await this.GetChamps();
         
-        const randomChampIndex = Math.abs(Math.floor(this.rnd.next()*champs.length));
+        const randomChampIndex = Math.abs(Math.floor(this.rnd.next() * champs.length));
         const randomChamp = champs[randomChampIndex];
         
         this.GetRandomQuote(randomChamp);
@@ -42,52 +43,63 @@ export default class ChampGuesser{
             if(champs[i].name.toLowerCase().includes(guess.toLowerCase())) champGuess = champs[i];
         };
 
-        if(champGuess != null){
-            let isCorrect = champGuess.name == champ.name;
+        if(champGuess == null) return;
 
-            let row: HTMLDivElement = document.createElement("div") as HTMLDivElement;
-            row.className = "flex flex-row items-center justify-center gap-2 bg-gray-900 w-min py-4 px-6";
-            row.innerHTML = `
-                <p class="text-center image w-20 h-20 bg-gray-800"><img src="./public/images/legends_cards/${champGuess.name}_Legend_Card.webp" class="-translate-y-2.5" alt="${champGuess.name}"></p>
-                <p class="text-center name w-30 text-2xl ${(isCorrect ? "text-green-500" : "text-red-500")}">${champGuess.name}</p>
-            `;
-            //document.querySelector("#guesses")?.appendChild(row);
+        let isCorrect = champGuess.name == champ.name;
 
-            // Insert the row after the first element in the table
-            const table = document.querySelector("#table");
-            if(table && table.children.length > 0){
-                table.insertBefore(row, table.children[1] || null);
-            } else {
-                table?.appendChild(row);
-            }
-            
-            (document.querySelector("#champ_search")as HTMLInputElement).value = "";
+        this.guesses.push(champGuess.name);
+        localStorage.setItem('guesses', JSON.stringify(this.guesses));
 
-            this.numOfGuesses++;
-            this.CheckCorrectGuess(champGuess.name, champ.name);
-        };
+        let row: HTMLDivElement = this.NewRow(champGuess.name, isCorrect);
+        
+        document.querySelector("#guesses")?.insertAdjacentElement("afterbegin", row);  
+        
+        (document.querySelector("#champ_search")as HTMLInputElement).value = "";
 
+        this.numOfGuesses++;
+        if(isCorrect) this.Win();
     };
 
-    CheckCorrectGuess(guess: string, champ: string) {
-        if(guess == champ){
-            document.querySelector("#search")!.innerHTML = `<h4>Gratulálok eltaláltad!</h4><br><p>Próbálozások száma: ${this.numOfGuesses}</p>` ;
-            this.Save();
-        };
-    };
+    NewRow(champName: string, isCorrect: boolean){
+        let row: HTMLDivElement = document.createElement("div") as HTMLDivElement;
+        row.className = "flex flex-row items-center justify-center gap-2 bg-gray-900 w-min py-4 px-6";
+        row.innerHTML = `
+            <p class="text-center image w-20 h-20 bg-gray-800"><img src="./public/images/legends_cards/${champName}_Legend_Card.webp" class="-translate-y-2.5" alt="${champName}"></p>
+            <p class="text-center name w-30 text-2xl ${(isCorrect ? "text-green-500" : "text-red-500")}">${champName}</p>
+        `;
 
-    Save(): void{
+        return row;
+    }
+
+    Win() {
+        document.querySelector("#search")!.innerHTML = `<h4>You Win!</h4><br><p>Number of guesses: ${this.numOfGuesses}</p>` ;
+        
         localStorage.setItem('numOfChampGuesses', this.numOfGuesses.toString());
         localStorage.setItem('date', new Date().getDate().toString());
+        localStorage.setItem('win', "true");
     };
 
     CheckForSave(){
         const getNum = localStorage.getItem('numOfChampGuesses');
         const getDate = localStorage.getItem('date');
+        const getWin = localStorage.getItem('win');
+        const guesses = localStorage.getItem('guesses');
+
         if(getNum && getDate){
             if(parseInt(getDate) == new Date().getDate()){
-                document.querySelector("#search")!.innerHTML = `<h4>A mai feladványt már teljesítetted!</h4><br><p>Próbálozások száma:${getNum}</p>`;   
+                document.querySelector("#search")!.innerHTML = `<h4>You have completed today's quiz!</h4><br><p>Number of guesses: ${getNum}</p>`;   
             };
         };
-    };
-};
+
+        if(guesses){
+            this.guesses = JSON.parse(guesses);
+            for(let i = 0; i < this.guesses.length; i++){
+                let champGuess = this.guesses[i];
+                let isWinner = (getWin && i == this.guesses.length - 1) ? true : false;
+
+                document.querySelector("#guesses")?.insertAdjacentElement("afterbegin", this.NewRow(champGuess, isWinner));
+                this.numOfGuesses++;
+            };
+        };
+    }  
+}

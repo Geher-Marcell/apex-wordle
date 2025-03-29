@@ -37,7 +37,8 @@ export default class ChampGuesser{
     };
 
     async DisplayGuess(champ: any, champs: any){
-        const guess = (document.querySelector("#champ_search")as HTMLInputElement).value;
+        const selectElement = document.querySelector("#champ_search") as HTMLSelectElement;
+        const guess = selectElement.value;
         let champGuess;
         for(let i = 0; i < champs.length; i++){
             if(champs[i].name.toLowerCase().includes(guess.toLowerCase())) champGuess = champs[i];
@@ -53,6 +54,10 @@ export default class ChampGuesser{
         let row: HTMLDivElement = this.NewRow(champGuess.name, isCorrect);
         
         document.querySelector("#guesses")?.insertAdjacentElement("afterbegin", row);  
+        selectElement.querySelector(`option[value="${champGuess.name}"]`)?.remove();
+        const remainingOptions = Array.from(selectElement.options).map(option => option.value);
+        localStorage.setItem('availableChamps', JSON.stringify(remainingOptions));
+        selectElement.value = "";
         
         (document.querySelector("#champ_search")as HTMLInputElement).value = "";
 
@@ -79,11 +84,12 @@ export default class ChampGuesser{
         localStorage.setItem('win', "true");
     };
 
-    CheckForSave(){
+    async CheckForSave(){
         const getNum = localStorage.getItem('numOfChampGuesses');
         const getDate = localStorage.getItem('date');
         const getWin = localStorage.getItem('win');
         const guesses = localStorage.getItem('guesses');
+        const savedChamps = localStorage.getItem('availableChamps');
 
         if(getNum && getDate){
             if(parseInt(getDate) == new Date().getDate()){
@@ -101,5 +107,41 @@ export default class ChampGuesser{
                 this.numOfGuesses++;
             };
         };
+
+        if (savedChamps != null) {
+            const selectElement = document.querySelector("#champ_search") as HTMLSelectElement;
+            selectElement.innerHTML = "";
+            
+            JSON.parse(savedChamps).forEach((champName: string) => {
+                const option = document.createElement("option");
+                option.value = champName;
+                option.textContent = champName;
+                selectElement.appendChild(option);
+            });
+        } else {
+            this.PopulateChampSelect(await this.GetChamps());
+        }
     }  
+
+    async PopulateChampSelect(champs: any) {
+        const selectElement = document.querySelector("#champ_search") as HTMLSelectElement;
+        selectElement.innerHTML = "";
+
+        const sortedChamps = [...champs].sort((a: any, b: any) => a.name.localeCompare(b.name));
+    
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.textContent = "";
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        selectElement.appendChild(defaultOption);
+    
+        sortedChamps.forEach((champ: any) => {
+            const option = document.createElement("option");
+            option.value = champ.name;
+            option.textContent = champ.name;
+            selectElement.appendChild(option);
+        });
+    }
+    
 }

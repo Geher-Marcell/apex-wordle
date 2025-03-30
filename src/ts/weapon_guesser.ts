@@ -62,7 +62,7 @@ export default class WeaponGuesser{
         }
 
         this.guesses.push(weaponGuess);
-        localStorage.setItem('guesses', JSON.stringify(this.guesses));
+        localStorage.setItem('weaponGuesses', JSON.stringify(this.guesses));
 
         selectElement.querySelector(`option[value="${weaponGuess.name}"]`)?.remove();
         const remainingOptions = Array.from(selectElement.options).map(option => option.value);
@@ -96,7 +96,7 @@ export default class WeaponGuesser{
     async CheckForSave() {
         const num = localStorage.getItem('numOfWeaponGuesses');
         const date = localStorage.getItem('date');
-        const guesses = localStorage.getItem('guesses');
+        const guesses = localStorage.getItem('weaponGuesses');
         const savedWeapons = localStorage.getItem('availableWeapons');
         if(num && date){
             if(parseInt(date) == new Date().getDate()){
@@ -133,8 +133,6 @@ export default class WeaponGuesser{
 
     NewRow(weaponGuess: any){
         const table = document.querySelector("#table");
-
-        console.log(weaponGuess.name == this.randomWeapon.name);
         
         let row: HTMLDivElement = document.createElement("div") as HTMLDivElement;
         row.className = "flex flex-row items-center gap-20 h-20 bg-gray-900 p-3";

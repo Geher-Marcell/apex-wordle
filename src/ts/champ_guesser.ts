@@ -18,7 +18,8 @@ export default class ChampGuesser{
     };
 
     async Initialize(){
-        this.CheckForSave();
+        await this.CheckForSave();
+        localStorage.setItem('date', new Date().getDate().toString());
         const champs = await this.GetChamps();
         
         const randomChampIndex = Math.abs(Math.floor(this.rnd.next() * champs.length));
@@ -32,7 +33,8 @@ export default class ChampGuesser{
     };
 
     GetRandomQuote(champ: any){
-        let randomLineIndex = Math.floor(this.rnd.next() * champ.voicelines.length);
+        let randomLineIndex = Math.abs(Math.floor(this.rnd.next() * champ.voicelines.length));
+        console.log(randomLineIndex);
         document.querySelector("#quoteHolder p")!.innerHTML = champ.voicelines[randomLineIndex];
     };
 
@@ -89,15 +91,16 @@ export default class ChampGuesser{
         const getDate = localStorage.getItem('date');
         const getWin = localStorage.getItem('win');
         const guesses = localStorage.getItem('guesses');
-        const savedChamps = localStorage.getItem('availableChamps');
-
+        const savedChamps = localStorage.getItem('availableChamps');        
+        
         if(getNum && getDate){
             if(parseInt(getDate) == new Date().getDate()){
                 document.querySelector("#search")!.innerHTML = `<h4>You have completed today's quiz!</h4><br><p>Number of guesses: ${getNum}</p>`;   
             };
         };
 
-        if(guesses){
+        if(guesses && (getDate && parseInt(getDate) == new Date().getDate())){
+            console.log("Vannak guessek")
             this.guesses = JSON.parse(guesses);
             for(let i = 0; i < this.guesses.length; i++){
                 let champGuess = this.guesses[i];

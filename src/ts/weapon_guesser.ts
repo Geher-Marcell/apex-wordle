@@ -18,11 +18,14 @@ export default class WeaponGuesser{
         const weapons = await this.GetWeapons();
         const randomWeaponIndex = Math.abs(Math.floor(this.rnd.next() * weapons.length));
         this.randomWeapon = weapons[randomWeaponIndex];
-        this.CheckForSave();
+        await this.CheckForSave();
+        localStorage.setItem('date', new Date().getDate().toString());
         
         (document.querySelector("#guess_weapon_btn") as HTMLButtonElement)?.addEventListener('click', async () => {
             this.DisplayGuess(weapons, this.randomWeapon);
         });
+
+        console.log(this.randomWeapon);
     };
 
     async GetWeapons(){
@@ -43,6 +46,7 @@ export default class WeaponGuesser{
         if(weaponGuess == null) return;
         let row: HTMLDivElement = document.createElement("div") as HTMLDivElement;
         row.className = "flex flex-row items-center gap-20 h-20 bg-gray-900 p-3";
+        console.log(weaponGuess);
         row.innerHTML = `
             <p class="border text-center w-40 bg-red-700 bg-green-700 bg-${((weaponGuess.name == rndWeapon.name)? "green" : "red")}-700">${weaponGuess.name}</p>
             <p class="border text-center w-40 bg-${((weaponGuess.weapon_type == rndWeapon.weapon_type)? "green" : "red")}-700">${weaponGuess.weapon_type}</p>
@@ -62,7 +66,7 @@ export default class WeaponGuesser{
         }
 
         this.guesses.push(weaponGuess);
-        localStorage.setItem('guesses', JSON.stringify(this.guesses));
+        localStorage.setItem('weaponGuesses', JSON.stringify(this.guesses));
 
         selectElement.querySelector(`option[value="${weaponGuess.name}"]`)?.remove();
         const remainingOptions = Array.from(selectElement.options).map(option => option.value);
@@ -96,15 +100,16 @@ export default class WeaponGuesser{
     async CheckForSave() {
         const num = localStorage.getItem('numOfWeaponGuesses');
         const date = localStorage.getItem('date');
-        const guesses = localStorage.getItem('guesses');
+        const guesses = localStorage.getItem('weaponGuesses');
         const savedWeapons = localStorage.getItem('availableWeapons');
+
         if(num && date){
             if(parseInt(date) == new Date().getDate()){
                 document.querySelector("#search")!.innerHTML = `<h4>A mai feladványt már teljesítetted!</h4><br><p>Próbálozások száma:${num}</p>`;   
             };
         };
 
-        if(guesses){
+        if(guesses && (date && parseInt(date) == new Date().getDate())){
             this.guesses = JSON.parse(guesses);
             for(let i = 0; i < this.guesses.length; i++){
                 let weaponGuess = this.guesses[i];
@@ -127,8 +132,6 @@ export default class WeaponGuesser{
         } else {
             this.PopulateWeaponSelect(await this.GetWeapons());
         }
-
-
     };
 
     NewRow(weaponGuess: any){

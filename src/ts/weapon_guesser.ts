@@ -136,8 +136,6 @@ export default class WeaponGuesser{
 
     NewRow(weaponGuess: any){
         const table = document.querySelector("#table");
-
-        console.log(weaponGuess.name == this.randomWeapon.name);
         
         let row: HTMLDivElement = document.createElement("div") as HTMLDivElement;
         row.className = "flex flex-row items-center gap-20 h-20 bg-gray-900 p-3";

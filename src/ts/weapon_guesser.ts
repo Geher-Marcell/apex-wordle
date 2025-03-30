@@ -15,6 +15,7 @@ export default class WeaponGuesser{
     };
 
     async Initialize(){
+        this.ClearOldData();
         const weapons = await this.GetWeapons();
         const randomWeaponIndex = Math.abs(Math.floor(this.rnd.next() * weapons.length));
         this.randomWeapon = weapons[randomWeaponIndex];
@@ -48,7 +49,7 @@ export default class WeaponGuesser{
         row.className = "flex flex-row items-center gap-20 h-20 bg-gray-900 p-3";
         console.log(weaponGuess);
         row.innerHTML = `
-            <p class="border text-center w-40 bg-red-700 bg-green-700 bg-${((weaponGuess.name == rndWeapon.name)? "green" : "red")}-700">${weaponGuess.name}</p>
+            <p class="border text-center w-40 bg-${((weaponGuess.name == rndWeapon.name)? "green" : "red")}-700">${weaponGuess.name}</p>
             <p class="border text-center w-40 bg-${((weaponGuess.weapon_type == rndWeapon.weapon_type)? "green" : "red")}-700">${weaponGuess.weapon_type}</p>
             <p class="border text-center w-40 bg-${((weaponGuess.ammo_type == rndWeapon.ammo_type)? "green" : "red")}-700">${weaponGuess.ammo_type}</p>
             <p class="border text-center w-40 bg-${((weaponGuess.rpm == rndWeapon.rpm)? "green" : "red")}-700">${weaponGuess.rpm} ${this.CompareNumericalData(weaponGuess.rpm, rndWeapon.rpm)}</p>
@@ -77,7 +78,19 @@ export default class WeaponGuesser{
         this.numOfTries++;
         this.CheckGuess(weaponGuess.name, rndWeapon.name);
     };
-        
+    
+    ClearOldData() {
+        const storedDate = localStorage.getItem('date');
+        const currentDate = new Date().getDate().toString();
+
+        if (storedDate !== currentDate) {
+            localStorage.removeItem('numOfWeaponGuesses');
+            localStorage.removeItem('weaponGuesses');
+            localStorage.removeItem('availableWeapons');
+            localStorage.removeItem('win');
+            localStorage.setItem('date', currentDate);
+        }
+    }
 
     CheckGuess(guess: string, name: string): void{
         if(guess == name) {

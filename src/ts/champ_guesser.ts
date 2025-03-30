@@ -18,6 +18,7 @@ export default class ChampGuesser{
     };
 
     async Initialize(){
+        this.ClearOldData();
         await this.CheckForSave();
         localStorage.setItem('date', new Date().getDate().toString());
         const champs = await this.GetChamps();
@@ -71,7 +72,7 @@ export default class ChampGuesser{
         let row: HTMLDivElement = document.createElement("div") as HTMLDivElement;
         row.className = "flex flex-row items-center justify-center gap-2 bg-gray-900 w-min py-4 px-6";
         row.innerHTML = `
-            <p class="text-center image w-20 h-20 bg-gray-800"><img src="./public/images/legends_cards/${champName}_Legend_Card.webp" class="-translate-y-2.5" alt="${champName}"></p>
+            <p class="text-center image w-20 h-20 bg-gray-800"><img src="./public/images/legends_cards/${champName.replace(" ", "_")}_Legend_Card.webp" class="-translate-y-2.5" alt="${champName}"></p>
             <p class="text-center name w-30 text-2xl ${(isCorrect ? "text-green-500" : "text-red-500")}">${champName}</p>
         `;
 
@@ -124,7 +125,20 @@ export default class ChampGuesser{
         } else {
             this.PopulateChampSelect(await this.GetChamps());
         }
-    }  
+    }
+
+    ClearOldData() {
+        const storedDate = localStorage.getItem('date');
+        const currentDate = new Date().getDate().toString();
+
+        if (storedDate !== currentDate) {
+            localStorage.removeItem('numOfChampGuesses');
+            localStorage.removeItem('guesses');
+            localStorage.removeItem('availableChamps');
+            localStorage.removeItem('win');
+            localStorage.setItem('date', currentDate);
+        }
+    }
 
     async PopulateChampSelect(champs: any) {
         const selectElement = document.querySelector("#champ_search") as HTMLSelectElement;

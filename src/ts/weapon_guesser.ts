@@ -25,8 +25,6 @@ export default class WeaponGuesser{
         (document.querySelector("#guess_weapon_btn") as HTMLButtonElement)?.addEventListener('click', async () => {
             this.DisplayGuess(weapons, this.randomWeapon);
         });
-
-        console.log(this.randomWeapon);
     };
 
     async GetWeapons(){
@@ -38,6 +36,8 @@ export default class WeaponGuesser{
         const selectElement = document.querySelector("#weapon_search") as HTMLSelectElement;
         const guess = selectElement.value;
 
+        if (guess == ""){ return; }
+
         let weaponGuess;
         for(let i = 0; i<weapons.length; i++){
             if((weapons[i].name.toLowerCase()).includes( guess.toLowerCase())){
@@ -47,7 +47,6 @@ export default class WeaponGuesser{
         if(weaponGuess == null) return;
         let row: HTMLDivElement = document.createElement("div") as HTMLDivElement;
         row.className = "flex flex-row items-center gap-20 h-20 bg-gray-900 p-3";
-        console.log(weaponGuess);
         row.innerHTML = `
             <p class="border text-center w-40 bg-${((weaponGuess.name == rndWeapon.name)? "green" : "red")}-700">${weaponGuess.name}</p>
             <p class="border text-center w-40 bg-${((weaponGuess.weapon_type == rndWeapon.weapon_type)? "green" : "red")}-700">${weaponGuess.weapon_type}</p>

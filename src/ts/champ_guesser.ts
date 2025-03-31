@@ -35,13 +35,15 @@ export default class ChampGuesser{
 
     GetRandomQuote(champ: any){
         let randomLineIndex = Math.abs(Math.floor(this.rnd.next() * champ.voicelines.length));
-        console.log(randomLineIndex);
         document.querySelector("#quoteHolder p")!.innerHTML = champ.voicelines[randomLineIndex];
     };
 
     async DisplayGuess(champ: any, champs: any){
         const selectElement = document.querySelector("#champ_search") as HTMLSelectElement;
         const guess = selectElement.value;
+        
+        if (guess == "") { return; }
+
         let champGuess;
         for(let i = 0; i < champs.length; i++){
             if(champs[i].name.toLowerCase().includes(guess.toLowerCase())) champGuess = champs[i];
@@ -101,7 +103,6 @@ export default class ChampGuesser{
         };
 
         if(guesses && (getDate && parseInt(getDate) == new Date().getDate())){
-            console.log("Vannak guessek")
             this.guesses = JSON.parse(guesses);
             for(let i = 0; i < this.guesses.length; i++){
                 let champGuess = this.guesses[i];
